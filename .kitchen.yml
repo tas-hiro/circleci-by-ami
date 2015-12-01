@@ -1,0 +1,30 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: your_key_pair_name.pem
+  security_group_ids: ['sg-00000000']
+  region: ap-northeast-1
+  availability_zone: ap-northeast-1c
+  require_chef_omnibus: true
+  subnet_id: subnet-00000000
+  instance_type: m1.small
+  associate_public_ip: true
+  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+
+transport:
+  ssh_key: <%= ENV['AWS_SSH_KEY_PATH'] %>
+  connection_timeout: 10
+  connection_retries: 5
+
+platforms:
+  - name: instance_name
+    driver:
+      image_id: ami-00000000
+      username: root
+
+suites:
+  - name: default
+    run_list:
+      - role[your-test]
+    attributes:

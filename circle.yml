@@ -1,0 +1,18 @@
+machine:
+  environment:
+  ruby:
+    version: 2.2.1
+  timezone: Asia/Tokyo
+  services:
+    - docker
+
+dependencies:
+  pre:
+  post:
+    - bundle install
+
+test:
+  pre:
+  override:
+  post:
+    - bundle exec kitchen test
